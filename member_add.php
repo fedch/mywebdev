@@ -9,6 +9,7 @@
 
     <body>
         <?php
+            // Get the information for the database connection
             require_once('../../settings/settings.php');
 
             // Upon successful connection
