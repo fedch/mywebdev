@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 8</title>
+</head>
+<body>
+    <!-- Question A: Print sum of nums 1 - 10 using js -->
+    <h2>Sum of numbers from 1 to 10</h2>
+    
+    <script>
+        // Initialize total to 0 to an integer variable
+        let total = 0;
+        for (let i = 1; i <= 10; i++) {
+            total += i;
+            document.write("Subtotal after adding " + i + ": " + total + "<br>");
+        }
+    </script>
+    <!-- Question B: Change bg colours using different ways -->
+    <h2>Change background colour</h2>
+
+    <button onclick="changeColor('darkred');">Dark Red</button>
+    <button onclick="changeColor('#6495ED');">CornflowerBlue</button>
+
+    <!-- For the next 2 buttons I am using event listener -->
+    <button id="antiqueWhitekButton">AntiqueWhite</button>
+    <button id="aquaButton">Aquamarine</button>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        // Using addEventListener to attach event handlers
+        document.getElementById('antiqueWhitekButton').addEventListener('click', function() {
+            changeColor('#FAEBD7');
+        });
+
+        document.getElementById('aquaButton').addEventListener('click', function() {
+            changeColor('#7FFFD4');
+        });
+    </script>
+
+    <!-- Question D: Get user input and print each word on new line -->
+    <h2>Print words in a string</h2>
+    <button onclick="printWords();">Print words</button>
+    <div id="wordDisplay"></div> <!-- Added a div to display words -->
+
+    <script>
+        function printWords() {
+            let sentence = prompt("Enter a sentence with words separated by spaces");
+            let words = sentence.split(" ");
+            let displayDiv = document.getElementById('wordDisplay');
+            displayDiv.innerHTML = ''; // Clear previous words
+            words.forEach(word => {
+                displayDiv.innerHTML += word + "<br>"; // Append each word in a new line
+            });
+        }
+    </script>
+</body>
+</html>

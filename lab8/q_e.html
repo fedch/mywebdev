@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A simple email database</title>
+</head>
+<body>
+    <h1>A simple email database</h1>
+
+    <body>
+        <p>Open the browser console to see the output.</p>
+    </body>
+
+    <script>
+        // Define a class
+        class EmailRecord {
+            constructor(name, email) {
+                this.name = name;
+                this.email = email;
+            }
+
+            // Method to print the record
+            printRecord() {
+                console.log(`${this.name} | ${this.email}`);
+            }
+        }
+
+        // Create instances of the class
+        const record1 = new EmailRecord("Peter Peterson", "peter@email.com");
+        const record2 = new EmailRecord("Anne Smith", "anne@email.com");
+
+        // Output the records in the browser console
+        record1.printRecord();
+        record2.printRecord();
+
+        // Instanting another object using JSON to check if this object belongs to the defined class:
+
+        // Convert the object to JSON string
+        const jsonString = '{"name":"Mary Stevens","email":"maryn@email.com"}';
+        const recordFromJson = JSON.parse(jsonString);
+
+        // Check if the object belongs to the EmailRecord class (it will return false because it is a generic object, not an instance of EmailRecord class)
+        console.log(recordFromJson instanceof EmailRecord);
+
+        // Create a new instance of EmailRecord class using the JSON object (it will return true because it is now an instance of EmailRecord class)
+        const trueRecordFromJson = new EmailRecord(recordFromJson.name, recordFromJson.email);
+        console.log(trueRecordFromJson instanceof EmailRecord);
+
+        // Output the record in the browser console
+        trueRecordFromJson.printRecord();
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // This function is used to display the shopping cart
+        function AddRemoveItem(action, isbn) {
+            var book = $(`#book-${isbn}`).text();
+            var price = $(`#price-${isbn}`).text().replace('$', '');
+
+            // Send the data to the server
+            $.post('test.php', {
+                action: action,
+                isbn: isbn,
+                title: book,
+                price: price
+            }, function(data) {
+                $('#cart').html(data);
+            });
+        }
+
+        $(document).ready(function() {
+            var books = [
+                {
+                    cover: 'begaspnet.jpg',
+                    title: 'Beginning ASP.NET with C#',
+                    authors: 'Hart, Kauffman, Sussman, Ullman',
+                    isbn: '0764588508',
+                    price: '$39.99'
+                },
+                {
+                    cover: 'cprog.jpg',
+                    title: 'C Programming Language',
+                    authors: 'Brian W. Kernighan, Dennis M. Ritchie',
+                    isbn: '3249587245',
+                    price: '$60.59'
+                },
+                {
+                    cover: 'algos.png',
+                    title: 'Designing Data-Intensive Applications',
+                    authors: 'Martin Kleppmann',
+                    isbn: '823491423',
+                    price: '$50.00'
+                }
+            ];
+
+            // Display the books
+            var bookContainer = $('#books');
+            books.forEach(function(book) {
+                var bookHtml = `
+                    <div class="book">
+                        <br/>
+                        <img src="${book.cover}" />
+                        <br /><br />
+                        <b>Book:</b> <span id="book-${book.isbn}">${book.title}</span><br />
+                        <b>Authors: </b> <span id="authors-${book.isbn}">${book.authors}</span><br />
+                        <b>ISBN: </b> <span id="ISBN-${book.isbn}">${book.isbn}</span><br />
+                        <b>Price: </b> <span id="price-${book.isbn}">${book.price}</span><br /><br />
+                        <a href="#" onclick="AddRemoveItem('Add', '${book.isbn}');">Add to Shopping Cart</a><br /><br />
+                        <a href="#" onclick="AddRemoveItem('Remove', '${book.isbn}');">Remove from Shopping Cart</a><br /><br />
+                    </div>
+                `;
+                bookContainer.append(bookHtml);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="books"></div>
+    <span id="cart"><?php displayCart(); ?></span>
+</body>
+</html>
